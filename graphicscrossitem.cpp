@@ -4,6 +4,7 @@
 #include <QGraphicsSceneHoverEvent>
 #include <QDebug>
 
+
 GraphicsCrossItem::GraphicsCrossItem(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
     m_pen.setColor(Qt::red);
