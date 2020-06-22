@@ -48,7 +48,7 @@ private:
     //获取描点
     QVector<QRectF> anchorItem(const QRectF &rectf);
 
-    void adjustRect();
+    void adjustRect(QRectF &rectf);
 
 protected:
 

@@ -52,10 +52,8 @@ QVector<QRectF> GraphicsRectItem::anchorItem(const QRectF &rectf)
     return anchor;
 }
 
-void GraphicsRectItem::adjustRect()
+void GraphicsRectItem::adjustRect(QRectF &rectf)
 {
-    QRectF rectf = rect();
-
     qreal left = rectf.left();
     qreal right = rectf.right();
     qreal top = rectf.top();
@@ -66,7 +64,7 @@ void GraphicsRectItem::adjustRect()
     rectf.setTop(qMin(top, bottom));
     rectf.setBottom(qMax(top, bottom));
 
-    qDebug() << "left: = " << left << "right: = " << right << "top: = " << top << "bottom: = " << bottom;
+    //qDebug() << "left: = " << left << "right: = " << right << "top: = " << top << "bottom: = " << bottom;
 
     setRect(rectf);
 }
@@ -157,19 +155,19 @@ void GraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
     switch (m_edge) {
     case Edge::TopLeft:
         rectf.setTopLeft(pos);
-        setRect(rectf);
+        //setRect(rectf);
         break;
     case Edge::TopRight:
         rectf.setTopRight(pos);
-        setRect(rectf);
+        //setRect(rectf);
         break;
     case Edge::BottomLeft:
         rectf.setBottomLeft(pos);
-        setRect(rectf);
+        //setRect(rectf);
         break;
     case Edge::BottomRight:
         rectf.setBottomRight(pos);
-        setRect(rectf);
+        //setRect(rectf);
         break;
     case Edge::Center:
         setFlag(QGraphicsItem::ItemIsMovable, true);
@@ -178,7 +176,7 @@ void GraphicsRectItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         break;
     }
 
-    //adjustRect();
+    adjustRect(rectf);
 
     QGraphicsRectItem::mouseMoveEvent(event);
 }

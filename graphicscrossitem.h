@@ -9,6 +9,7 @@
 class GraphicsCrossItem : public QObject , public QGraphicsItem
 {
     Q_OBJECT
+    Q_INTERFACES(QGraphicsItem)
     enum class Edge {
                 None = 0x0,
                 Top = 0x1,
