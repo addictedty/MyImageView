@@ -4,7 +4,6 @@
 #include <QGraphicsSceneHoverEvent>
 #include <QDebug>
 
-
 GraphicsCrossItem::GraphicsCrossItem(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
     m_pen.setColor(Qt::red);
@@ -152,8 +151,6 @@ void GraphicsCrossItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
         break;
     }
 
-    adjustRect();
-
     prepareGeometryChange();
 
     QGraphicsItem::mouseMoveEvent(event);
@@ -161,6 +158,26 @@ void GraphicsCrossItem::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void GraphicsCrossItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    if(event->button() == Qt::LeftButton)
+    {
+        switch (m_edge)
+        {
+        case Edge::TopLeft:
+        case Edge::TopRight:
+        case Edge::BottomLeft:
+        case Edge::BottomRight:
+            adjustRect();
+            break;
+        case Edge::Center:
+            setFlag(QGraphicsItem::ItemIsMovable, true);
+            break;
+        default:
+            break;
+        }
+
+        prepareGeometryChange();
+    }
+
     setFlag(QGraphicsItem::ItemIsMovable, true);
 
     QGraphicsItem::mouseReleaseEvent(event);

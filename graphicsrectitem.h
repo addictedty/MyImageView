@@ -48,7 +48,7 @@ private:
     //获取描点
     QVector<QRectF> anchorItem(const QRectF &rectf);
 
-    void adjustRect(QRectF &rectf);
+    QRectF adjustRect(QRectF rectf);        //调整矩形四个点，避免出现宽度或高度为负数的情况
 
 protected:
 
