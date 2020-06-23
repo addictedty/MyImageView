@@ -75,7 +75,10 @@ public:
     void hideCross(QString crossName = "");
     bool removeCross(QString crossName = "");
 
+    void dispText(QString &text, QString textName = "");
     void dispText(QString &text, QPointF pos, int size = 9, QString textName = "");
+    void hideText(QString textName = "");
+    bool removeText(QString textName = "");
 
 public slots:
     void fromImage(QImage image);       //加载图像

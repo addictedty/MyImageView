@@ -15,9 +15,10 @@ public:
     GraphicsTextItem(QString &text, QPointF pos, int pointSize, QGraphicsItem *parent = nullptr);
 
 public:
+    void setTextColor(QColor color);
     void setText(QString text, QPointF pos, int pointSize);
-    void setFont(QFont &font);
     void setPointSize(int pointSize);
+    void setFont(QFont &font);
 
     void setText(const QString &text);
 

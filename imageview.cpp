@@ -188,7 +188,14 @@ QRectF ImageView::getDispRect(QString rectName)
 
 void ImageView::hideRect(QString rectName)
 {
-    if(m_dispRectMap.contains(rectName))
+    if(rectName.isEmpty())
+    {
+        QList<GraphicsRectItem*> listItem = m_dispRectMap.values();
+
+        foreach (GraphicsRectItem *var, listItem)
+            var->setVisible(false);
+    }
+    else if(m_dispRectMap.contains(rectName))
     {
         m_dispRect = m_dispRectMap.value(rectName);
         m_dispRect->setVisible(false);
@@ -197,7 +204,15 @@ void ImageView::hideRect(QString rectName)
 
 bool ImageView::removeRect(QString rectName)
 {
-    if(m_dispRectMap.contains(rectName))
+    if(rectName.isEmpty())
+    {
+        QList<GraphicsRectItem*> listItem = m_dispRectMap.values();
+
+        foreach (GraphicsRectItem *var, listItem)
+            scene()->removeItem(var);
+        return true;
+    }
+    else if(m_dispRectMap.contains(rectName))
     {
         m_dispRect = m_dispRectMap.value(rectName);
         scene()->removeItem(m_dispRect);
@@ -246,7 +261,14 @@ QLineF ImageView::getDispLine(QString lineName)
 
 void ImageView::hideLine(QString lineName)
 {
-    if(m_dispLineMap.contains(lineName))
+    if(lineName.isEmpty())
+    {
+        QList<GraphicsLineItem*> listItem = m_dispLineMap.values();
+
+        foreach (GraphicsLineItem *var, listItem)
+            var->setVisible(false);
+    }
+    else if(m_dispLineMap.contains(lineName))
     {
         m_dispLine = m_dispLineMap.value(lineName);
         m_dispLine->setVisible(false);
@@ -255,7 +277,15 @@ void ImageView::hideLine(QString lineName)
 
 bool ImageView::removeLine(QString lineName)
 {
-    if(m_dispLineMap.contains(lineName))
+    if(lineName.isEmpty())
+    {
+        QList<GraphicsLineItem*> listItem = m_dispLineMap.values();
+
+        foreach (GraphicsLineItem *var, listItem)
+            scene()->removeItem(var);
+        return true;
+    }
+    else if(m_dispLineMap.contains(lineName))
     {
         m_dispLine = m_dispLineMap.value(lineName);
         scene()->removeItem(m_dispLine);
@@ -344,7 +374,14 @@ bool ImageView::getDispCross(QPointF &center, qreal width, qreal height, QString
 
 void ImageView::hideCross(QString crossName)
 {
-    if(m_dispCrossMap.contains(crossName))
+    if(crossName.isEmpty())
+    {
+        QList<GraphicsCrossItem*> listItem = m_dispCrossMap.values();
+
+        foreach (GraphicsCrossItem *var, listItem)
+            var->setVisible(false);
+    }
+    else if(m_dispCrossMap.contains(crossName))
     {
         m_dispCross = m_dispCrossMap.value(crossName);
         m_dispCross->setVisible(false);
@@ -353,7 +390,15 @@ void ImageView::hideCross(QString crossName)
 
 bool ImageView::removeCross(QString crossName)
 {
-    if(m_dispCrossMap.contains(crossName))
+    if(crossName.isEmpty())
+    {
+        QList<GraphicsCrossItem*> listItem = m_dispCrossMap.values();
+
+        foreach (GraphicsCrossItem *var, listItem)
+            scene()->removeItem(var);
+        return true;
+    }
+    else if(m_dispCrossMap.contains(crossName))
     {
         m_dispCross = m_dispCrossMap.value(crossName);
         scene()->removeItem(m_dispCross);
@@ -364,31 +409,26 @@ bool ImageView::removeCross(QString crossName)
     return false;
 }
 
+void ImageView::dispText(QString &text, QString textName)
+{
+    if(textName.isEmpty())
+    {
+        if(m_dispTest == nullptr)
+            return;
+        m_dispTest->setText(text);
+    }
+    else
+    {
+        if(m_dispTextMap.contains(textName))
+        {
+            m_dispTest = m_dispTextMap.value(textName);
+            m_dispTest->setText(text);
+        }
+    }
+}
+
 void ImageView::dispText(QString &text, QPointF pos, int size, QString textName)
 {
-//    if(textName.isEmpty())
-//    {
-//        m_dispTest = new QGraphicsTextItem(text);
-//        m_dispTest->setPos(pos);
-//        scene()->addItem(m_dispTest);
-//    }
-//    else
-//    {
-//        if(m_dispTextMap.contains(textName))
-//        {
-//            m_dispTest = m_dispTextMap.value(textName);
-//            m_dispTest->setPlainText(text);
-//            m_dispTest->setPos(pos);
-//        }
-//        else
-//        {
-//            m_dispTest = new QGraphicsTextItem(text);
-//            m_dispTest->setPos(pos);
-//            m_dispTextMap.insert(textName, m_dispTest);
-//            scene()->addItem(m_dispTest);
-//        }
-//    }
-
     if(textName.isEmpty())
     {
         m_dispTest = new GraphicsTextItem(text, pos, size);
@@ -409,6 +449,43 @@ void ImageView::dispText(QString &text, QPointF pos, int size, QString textName)
             scene()->addItem(m_dispTest);
         }
     }
+}
+
+void ImageView::hideText(QString textName)
+{
+    if(textName.isEmpty())
+    {
+        QList<GraphicsTextItem*> listItem = m_dispTextMap.values();
+
+        foreach (GraphicsTextItem *var, listItem)
+            var->setVisible(false);
+    }
+    else if(m_dispTextMap.contains(textName))
+    {
+        m_dispTest = m_dispTextMap.value(textName);
+        m_dispTest->setVisible(false);
+    }
+}
+
+bool ImageView::removeText(QString textName)
+{
+    if(textName.isEmpty())
+    {
+        QList<GraphicsTextItem*> listItem = m_dispTextMap.values();
+
+        foreach (GraphicsTextItem *var, listItem)
+            scene()->removeItem(var);
+        return true;
+    }
+    else if(m_dispTextMap.contains(textName))
+    {
+        m_dispTest = m_dispTextMap.value(textName);
+        scene()->removeItem(m_dispTest);
+        m_dispTextMap.remove(textName);
+        return true;
+    }
+
+    return false;
 }
 
 void ImageView::fromImage(QImage image)

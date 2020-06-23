@@ -155,6 +155,6 @@ void MainWindow::on_btnDispText1_clicked()
 
 void MainWindow::on_btnDispText2_clicked()
 {
-    QString text = "显示文字\r\n12345";
-    ui->graphicsView->dispText(text, QPointF(200, 200), 50, "text1");
+    QString text = "更改显示!!!!!!\r\n12345";
+    ui->graphicsView->dispText(text);
 }

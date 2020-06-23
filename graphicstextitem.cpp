@@ -30,6 +30,11 @@ GraphicsTextItem::GraphicsTextItem(QString &text, QPointF pos, int pointSize, QG
     prepareGeometryChange();
 }
 
+void GraphicsTextItem::setTextColor(QColor color)
+{
+    m_text->setDefaultTextColor(color);
+}
+
 void GraphicsTextItem::setText(QString text, QPointF pos, int pointSize)
 {
     font = m_text->font();
@@ -60,6 +65,13 @@ void GraphicsTextItem::setPointSize(int pointSize)
 void GraphicsTextItem::setText(const QString &text)
 {
     m_text->setPlainText(text);
+    m_text->adjustSize();
+
+    QRectF temp = m_text->mapRectToParent(m_text->boundingRect());
+    m_rect.setRect(temp.left(), temp.top(),
+                   temp.width(), temp.height());
+
+    prepareGeometryChange();
 }
 
 QRectF GraphicsTextItem::boundingRect() const
