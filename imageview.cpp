@@ -186,13 +186,26 @@ QRectF ImageView::getDispRect(QString rectName)
         return QRectF();
 }
 
-void ImageView::unDispRect(QString rectName)
+void ImageView::hideRect(QString rectName)
 {
     if(m_dispRectMap.contains(rectName))
     {
         m_dispRect = m_dispRectMap.value(rectName);
         m_dispRect->setVisible(false);
     }
+}
+
+bool ImageView::removeRect(QString rectName)
+{
+    if(m_dispRectMap.contains(rectName))
+    {
+        m_dispRect = m_dispRectMap.value(rectName);
+        scene()->removeItem(m_dispRect);
+        m_dispRectMap.remove(rectName);
+        return true;
+    }
+
+    return false;
 }
 
 void ImageView::dispLine(QLineF linef, QString lineName)
@@ -231,13 +244,26 @@ QLineF ImageView::getDispLine(QString lineName)
         return QLineF();
 }
 
-void ImageView::unDispLine(QString lineName)
+void ImageView::hideLine(QString lineName)
 {
     if(m_dispLineMap.contains(lineName))
     {
         m_dispLine = m_dispLineMap.value(lineName);
         m_dispLine->setVisible(false);
     }
+}
+
+bool ImageView::removeLine(QString lineName)
+{
+    if(m_dispLineMap.contains(lineName))
+    {
+        m_dispLine = m_dispLineMap.value(lineName);
+        scene()->removeItem(m_dispLine);
+        m_dispCrossMap.remove(lineName);
+        return true;
+    }
+
+    return false;
 }
 
 void ImageView::drawCross(QString crossName, bool redraw)
@@ -265,6 +291,20 @@ void ImageView::drawCross(QString crossName, bool redraw)
     setDragMode(QGraphicsView::NoDrag);
 }
 
+bool ImageView::getDrawCross(QPointF &center, qreal width, qreal height, QString crossName)
+{
+    if(m_drawCrossMap.contains(crossName))
+    {
+        m_drawCross = m_drawCrossMap.value(crossName);
+        center = m_drawCross->getRect().center();
+        width = m_drawCross->getRect().width();
+        height = m_drawCross->getRect().height();
+        return true;
+    }
+
+    return false;
+}
+
 void ImageView::dispCross(QPointF center, qreal width, qreal height, QString crossName)
 {
     if(crossName.isEmpty())
@@ -284,6 +324,89 @@ void ImageView::dispCross(QPointF center, qreal width, qreal height, QString cro
             m_dispCross = new GraphicsCrossItem(center, width, height);
             m_dispCrossMap.insert(crossName, m_dispCross);
             scene()->addItem(m_dispCross);
+        }
+    }
+}
+
+bool ImageView::getDispCross(QPointF &center, qreal width, qreal height, QString crossName)
+{
+    if(m_dispCrossMap.contains(crossName))
+    {
+        m_dispCross = m_dispCrossMap.value(crossName);
+        center = m_dispCross->getRect().center();
+        width = m_dispCross->getRect().width();
+        height = m_dispCross->getRect().height();
+        return true;
+    }
+
+    return false;
+}
+
+void ImageView::hideCross(QString crossName)
+{
+    if(m_dispCrossMap.contains(crossName))
+    {
+        m_dispCross = m_dispCrossMap.value(crossName);
+        m_dispCross->setVisible(false);
+    }
+}
+
+bool ImageView::removeCross(QString crossName)
+{
+    if(m_dispCrossMap.contains(crossName))
+    {
+        m_dispCross = m_dispCrossMap.value(crossName);
+        scene()->removeItem(m_dispCross);
+        m_dispCrossMap.remove(crossName);
+        return true;
+    }
+
+    return false;
+}
+
+void ImageView::dispText(QString &text, QPointF pos, int size, QString textName)
+{
+//    if(textName.isEmpty())
+//    {
+//        m_dispTest = new QGraphicsTextItem(text);
+//        m_dispTest->setPos(pos);
+//        scene()->addItem(m_dispTest);
+//    }
+//    else
+//    {
+//        if(m_dispTextMap.contains(textName))
+//        {
+//            m_dispTest = m_dispTextMap.value(textName);
+//            m_dispTest->setPlainText(text);
+//            m_dispTest->setPos(pos);
+//        }
+//        else
+//        {
+//            m_dispTest = new QGraphicsTextItem(text);
+//            m_dispTest->setPos(pos);
+//            m_dispTextMap.insert(textName, m_dispTest);
+//            scene()->addItem(m_dispTest);
+//        }
+//    }
+
+    if(textName.isEmpty())
+    {
+        m_dispTest = new GraphicsTextItem(text, pos, size);
+        m_dispTest->setPos(pos);
+        scene()->addItem(m_dispTest);
+    }
+    else
+    {
+        if(m_dispTextMap.contains(textName))
+        {
+            m_dispTest = m_dispTextMap.value(textName);
+            m_dispTest->setText(text, pos, size);
+        }
+        else
+        {
+            m_dispTest = new GraphicsTextItem(text, pos, size);
+            m_dispTextMap.insert(textName, m_dispTest);
+            scene()->addItem(m_dispTest);
         }
     }
 }

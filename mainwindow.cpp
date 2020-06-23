@@ -136,3 +136,25 @@ void MainWindow::on_btnDispCross_clicked()
 {
     ui->graphicsView->dispCross(QPointF(1688, 1352), 500, 200);
 }
+
+void MainWindow::on_btnGetDrawCross_clicked()
+{
+
+}
+
+void MainWindow::on_btnGetDispCross_clicked()
+{
+
+}
+
+void MainWindow::on_btnDispText1_clicked()
+{
+    QString text = "显示文字\r\n12345";
+    ui->graphicsView->dispText(text, QPointF(100, 100), 100, "text1");
+}
+
+void MainWindow::on_btnDispText2_clicked()
+{
+    QString text = "显示文字\r\n12345";
+    ui->graphicsView->dispText(text, QPointF(200, 200), 50, "text1");
+}

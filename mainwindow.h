@@ -49,6 +49,14 @@ private slots:
 
     void on_btnDispCross_clicked();
 
+    void on_btnGetDrawCross_clicked();
+
+    void on_btnGetDispCross_clicked();
+
+    void on_btnDispText1_clicked();
+
+    void on_btnDispText2_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

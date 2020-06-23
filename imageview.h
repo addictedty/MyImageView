@@ -8,6 +8,7 @@
 #include "graphicsrectitem.h"
 #include "graphicslineitem.h"
 #include "graphicscrossitem.h"
+#include "graphicstextitem.h"
 
 class ImageView : public QGraphicsView
 {
@@ -57,16 +58,24 @@ public:
     QRectF getDrawRect(QString rectName);
     void dispRect(QRectF rectf, QString rectName = "");
     QRectF getDispRect(QString rectName);
-    void unDispRect(QString rectName = "");
+    void hideRect(QString rectName = "");
+    bool removeRect(QString rectName = "");
 
     void drawLine(QString lineName, bool redraw = false);
     QLineF getDrawLine(QString lineName);
     void dispLine(QLineF linef, QString lineName = "");
     QLineF getDispLine(QString lineName);
-    void unDispLine(QString lineName = "");
+    void hideLine(QString lineName = "");
+    bool removeLine(QString lineName = "");
 
     void drawCross(QString crossName, bool redraw = false);
+    bool getDrawCross(QPointF &center, qreal width, qreal height, QString crossName);
     void dispCross(QPointF center, qreal width = 100, qreal height = 100, QString crossName = "");
+    bool getDispCross(QPointF &center, qreal width, qreal height, QString crossName);
+    void hideCross(QString crossName = "");
+    bool removeCross(QString crossName = "");
+
+    void dispText(QString &text, QPointF pos, int size = 9, QString textName = "");
 
 public slots:
     void fromImage(QImage image);       //加载图像
@@ -123,6 +132,10 @@ private:
     GraphicsCrossItem *m_drawCross;
     QMap<QString, GraphicsCrossItem*> m_dispCrossMap;
     GraphicsCrossItem *m_dispCross;
+
+    QString m_textName;             //文本索引
+    QMap<QString, GraphicsTextItem*> m_dispTextMap;
+    GraphicsTextItem *m_dispTest;
 
 private:
     QBrush &alphaTexture();

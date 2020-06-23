@@ -28,6 +28,7 @@ SOURCES += \
         graphicscrossitem.cpp \
         graphicslineitem.cpp \
         graphicsrectitem.cpp \
+        graphicstextitem.cpp \
         imageview.cpp \
         main.cpp \
         mainwindow.cpp
@@ -36,6 +37,7 @@ HEADERS += \
         graphicscrossitem.h \
         graphicslineitem.h \
         graphicsrectitem.h \
+        graphicstextitem.h \
         imageview.h \
         mainwindow.h
 

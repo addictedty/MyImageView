@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
-    <height>375</height>
+    <width>398</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -154,6 +154,76 @@
            <bool>false</bool>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
+           <item row="5" column="0">
+            <widget class="QPushButton" name="btnGetDrawCross">
+             <property name="text">
+              <string>获取绘制十字</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QPushButton" name="btnDrawLine">
+             <property name="text">
+              <string>绘制直线</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QPushButton" name="btnGetDispCross">
+             <property name="text">
+              <string>获取显示十字</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="btnGetDrawRect">
+             <property name="text">
+              <string>获取绘制矩形</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QPushButton" name="btnDispRect">
+             <property name="text">
+              <string>显示矩形</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QPushButton" name="btnDispCross">
+             <property name="text">
+              <string>显示十字</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QPushButton" name="btnGetDispRect">
+             <property name="text">
+              <string>获取显示矩形</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QPushButton" name="btnGetDispLine">
+             <property name="text">
+              <string>获取显示直线</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="btnGetDrawLine">
+             <property name="text">
+              <string>获取绘制直线</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QPushButton" name="btnDrawCross">
+             <property name="text">
+              <string>绘制十字</string>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QPushButton" name="btnDrawRect">
              <property name="text">
@@ -168,59 +238,17 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="btnGetDispRect">
+           <item row="6" column="0">
+            <widget class="QPushButton" name="btnDispText1">
              <property name="text">
-              <string>获取显示矩形</string>
+              <string>显示文本1</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QPushButton" name="btnGetDrawRect">
+           <item row="6" column="1">
+            <widget class="QPushButton" name="btnDispText2">
              <property name="text">
-              <string>获取绘制矩形</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QPushButton" name="btnGetDrawLine">
-             <property name="text">
-              <string>获取绘制直线</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QPushButton" name="btnDispRect">
-             <property name="text">
-              <string>显示矩形</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QPushButton" name="btnDrawLine">
-             <property name="text">
-              <string>绘制直线</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="QPushButton" name="btnGetDispLine">
-             <property name="text">
-              <string>获取显示直线</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="0">
-            <widget class="QPushButton" name="btnDrawCross">
-             <property name="text">
-              <string>绘制十字</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QPushButton" name="btnDispCross">
-             <property name="text">
-              <string>显示十字</string>
+              <string>显示文本2</string>
              </property>
             </widget>
            </item>
@@ -238,7 +266,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>384</width>
+     <width>398</width>
      <height>17</height>
     </rect>
    </property>
