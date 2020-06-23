@@ -78,6 +78,11 @@ void ImageView::setWheelZoom(bool flag)
     m_wheelZoom = flag;
 }
 
+void ImageView::setViewCenter(QPointF pos)
+{
+    centerOn(pos);
+}
+
 void ImageView::drawRect(QString rectName, bool redraw)
 {
     if(m_drawRectMap.contains(m_rectName))
@@ -321,7 +326,7 @@ void ImageView::drawCross(QString crossName, bool redraw)
     setDragMode(QGraphicsView::NoDrag);
 }
 
-bool ImageView::getDrawCross(QPointF &center, qreal width, qreal height, QString crossName)
+bool ImageView::getDrawCross(QPointF &center, qreal &width, qreal &height, QString crossName)
 {
     if(m_drawCrossMap.contains(crossName))
     {
@@ -358,7 +363,7 @@ void ImageView::dispCross(QPointF center, qreal width, qreal height, QString cro
     }
 }
 
-bool ImageView::getDispCross(QPointF &center, qreal width, qreal height, QString crossName)
+bool ImageView::getDispCross(QPointF &center, qreal &width, qreal &height, QString crossName)
 {
     if(m_dispCrossMap.contains(crossName))
     {
@@ -514,22 +519,19 @@ void ImageView::fromImage(QImage image)
     m_image = image;
 }
 
-void ImageView::zoomIn(double sx, double sy)
+void ImageView::zoomRatio(double sx, double sy)
 {
-    Q_UNUSED(sx);
-    Q_UNUSED(sy);
+    if(!m_PixmapItem)
+        return;
+    fitInView(m_PixmapItem, static_cast<Qt::AspectRatioMode>(m_mode));
+
+    scale(sx, sy);
 }
 
 void ImageView::zoomIn()
 {
     scale(1.2, 1.2);
     update();
-}
-
-void ImageView::zoomOut(double sx, double sy)
-{
-    Q_UNUSED(sx);
-    Q_UNUSED(sy);
 }
 
 void ImageView::zoomOut()

@@ -37,9 +37,9 @@ public:
 
     enum class Shape{
         None,
-        Rectangle,
-        Line,
-        Cross,
+        Rectangle,      //绘制矩形
+        Line,           //绘制直线
+        Cross,          //绘制十字
     };
 
 public:
@@ -50,42 +50,67 @@ public:
     void setCommand(Command cmd);               //设置操作指令
     void setCursorShape(CursorShape corShape);  //设置光标操作
     void setShape(Shape shape);                 //设置形状
+    //设置鼠标缩放标志
     void setWheelZoom(bool flag);
+
+    //设置pos点为窗口显示的中心的
+    void setViewCenter(QPointF pos);
 
     //rectName:矩形索引名称
     //redraw:是否重新绘制标志   true:清除已存在矩形重新绘制    false:显示rectName矩形,重新编辑
     void drawRect(QString rectName, bool redraw = false);
+    //获取绘制的矩形
     QRectF getDrawRect(QString rectName);
+    //显示矩形
     void dispRect(QRectF rectf, QString rectName = "");
+    //获取显示的矩形
     QRectF getDispRect(QString rectName);
+    //隐藏矩形, 若rectName为空,则隐藏所有
     void hideRect(QString rectName = "");
+    //删除矩形, 若rectName为空,则删除所有
     bool removeRect(QString rectName = "");
 
+    //lineName:直线索引名称
+    //redraw:是否重新绘制标志   true:清除已存在直线重新绘制    false:显示lineName直线,重新编辑
     void drawLine(QString lineName, bool redraw = false);
+    //获取绘制的直线
     QLineF getDrawLine(QString lineName);
+    //显示直线
     void dispLine(QLineF linef, QString lineName = "");
+    //获取显示的直线
     QLineF getDispLine(QString lineName);
+    //隐藏直线, 若lineName为空,则隐藏所有
     void hideLine(QString lineName = "");
+    //删除直线, 若lineName为空,则删除所有
     bool removeLine(QString lineName = "");
 
+    //crossName:十字索引名称
+    //redraw:是否重新绘制标志   true:清除已存在十字重新绘制    false:显示lineName十字,重新编辑
     void drawCross(QString crossName, bool redraw = false);
-    bool getDrawCross(QPointF &center, qreal width, qreal height, QString crossName);
+    //获取绘制的十字
+    bool getDrawCross(QPointF &center, qreal &width, qreal &height, QString crossName);
+    //显示十字
     void dispCross(QPointF center, qreal width = 100, qreal height = 100, QString crossName = "");
-    bool getDispCross(QPointF &center, qreal width, qreal height, QString crossName);
+    //获取显示的十字
+    bool getDispCross(QPointF &center, qreal &width, qreal &height, QString crossName);
+    //隐藏十字, 若crossName为空,则隐藏所有
     void hideCross(QString crossName = "");
+    //删除十字, 若crossName为空,则删除所有
     bool removeCross(QString crossName = "");
 
+    //显示文本
     void dispText(QString &text, QString textName = "");
     void dispText(QString &text, QPointF pos, int size = 9, QString textName = "");
+    //隐藏文本, 若textName为空,则隐藏所有
     void hideText(QString textName = "");
+    //删除文本, 若textName为空,则删除所有
     bool removeText(QString textName = "");
 
 public slots:
     void fromImage(QImage image);       //加载图像
 
-    void zoomIn(double sx, double sy);  //
+    void zoomRatio(double sx, double sy);  //
     void zoomIn();
-    void zoomOut(double sx, double sy); //
     void zoomOut();
 
     void resetZoom();
